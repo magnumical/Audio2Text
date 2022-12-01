@@ -125,7 +125,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         """Translate UI method."""
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("Transciber!", "Transciber!"))
         self.label.setText(_translate("MainWindow", "Selected file:"))
         self.label_3.setText(_translate("MainWindow", "Output file name:"))
         self.label_5.setText(_translate("MainWindow", "Transcribed text:"))
@@ -235,7 +235,7 @@ class convertVideoToAudioThread(QThread):
         """Run video conversion task."""
         audio_clip = AudioFileClip(self.mp4_file_name)
         audio_clip = audio_clip.fx(audio_normalize)
-        audio_clip = audio_clip.fx(volumex,2)
+        audio_clip = audio_clip.fx(volumex,1.5)
         
         audio_clip.write_audiofile(self.audio_file)
 
@@ -261,8 +261,10 @@ class transcriptionThread(QThread):
                 with sr.AudioFile(self.audio_file) as source:
                     print(i)
                     print(self.selected_lang)
-                    #r.adjust_for_ambient_noise(source)
+                    
                     audio = r.record(source, offset=i*10, duration=10)
+                    #r.adjust_for_ambient_noise(audio)
+
                     #audio = r.record(source)
                     f = open(self.output_file, "a")
                     f.write(r.recognize_google(audio,language=self.selected_lang))
