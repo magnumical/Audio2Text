@@ -1,4 +1,4 @@
-# Audio2Text
+# Transcriber
 We created this to transform videos/audio files into .txt file!
 
 
