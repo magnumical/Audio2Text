@@ -2,7 +2,7 @@
 We created this to transform videos/audio files into .txt file!
 
 
-To use the app, you need to setup following python environment. First you need to install <ffmpeg> and set it in environment paths of your system:
+To use the app, you need to setup following python environment. First you need to install ffmpeg and set it in environment paths of your system:
 
 https://www.geeksforgeeks.org/how-to-install-ffmpeg-on-windows/
 
