@@ -1,0 +1,14 @@
+argilla==1.11.0
+numpy==1.23.0
+moviepy==1.0.3
+openai_whisper==20230314
+PyQt5==5.15.10
+SpeechRecognition==3.10.0
+scaper
+scipy
+websockets==11.0
+protobuf==3.19.5
+dcase-util==0.2.11
+jams==0.3.4
+soundfile==0.10.1
+yt-dlp==2022.3.8.2
