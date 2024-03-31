@@ -6,8 +6,31 @@ Created in 2024
 reza.aminigougeh@mail.mcgill.ca
 """
 
+import sys, os
+
+import os
+import sys
+model_dir = getattr(sys, '_MEIPASS', os.path.abspath(os.path.dirname("./small.pt")))
+path_to_model = os.path.abspath(os.path.join(model_dir, 'small.pt'))
+
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
+
+
 import wave, contextlib, math, time
 import speech_recognition as sr
+
+model_path= resource_path("medium.pt")
+print(f"{model_path}")
+
 from moviepy.editor import VideoFileClip, AudioFileClip
 from moviepy.audio.fx.volumex import volumex
 from moviepy.audio.fx.audio_normalize import audio_normalize
@@ -16,9 +39,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QThread, pyqtSignal
 from PyQt5.QtWidgets import QFileDialog, QMessageBox, QButtonGroup  
 import whisper
-import os
 
-model = whisper.load_model("medium")
+
+model = whisper.load_model(f"{model_path}")#("./small.pt")
 
 class Ui_MainWindow(object):
     """Main window GUI."""
@@ -391,6 +414,7 @@ class transcriptionThread(QThread):
     
             except Exception as e:
                 print(f"An error occurred during Whisper transcription: {e}.")
+                
         # Other transcription methods...
 
     
