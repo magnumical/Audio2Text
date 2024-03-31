@@ -6,12 +6,14 @@ Created in 2024
 reza.aminigougeh@mail.mcgill.ca
 """
 
+
+
 import sys, os
 
 import os
 import sys
-model_dir = getattr(sys, '_MEIPASS', os.path.abspath(os.path.dirname("./small.pt")))
-path_to_model = os.path.abspath(os.path.join(model_dir, 'small.pt'))
+model_dir = getattr(sys, '_MEIPASS', os.path.abspath(os.path.dirname("./medium.pt")))
+path_to_model = os.path.abspath(os.path.join(model_dir, 'medium.pt'))
 
 def resource_path(relative_path):
     """ Get absolute path to resource, works for dev and for PyInstaller """
@@ -29,7 +31,9 @@ import wave, contextlib, math, time
 import speech_recognition as sr
 
 model_path= resource_path("medium.pt")
-print(f"{model_path}")
+
+print("[info] Starting applicaiton ...")
+print(f"[info] whisper model: {model_path}")
 
 from moviepy.editor import VideoFileClip, AudioFileClip
 from moviepy.audio.fx.volumex import volumex
@@ -42,6 +46,7 @@ import whisper
 
 
 model = whisper.load_model(f"{model_path}")#("./small.pt")
+print("[info] Model successfully loaded ...")
 
 class Ui_MainWindow(object):
     """Main window GUI."""
@@ -241,6 +246,8 @@ class Ui_MainWindow(object):
     def convert_mp4_to_wav(self):
         """Convert the mp4 video file into an audio file."""
         self.message_label.setText("Converting to *.wav ...")
+        print("[info] Converting to *.wav ...")
+
         self.convert_thread = convertVideoToAudioThread(self.mp4_file_name, self.audio_file)
         self.convert_thread.finished.connect(self.finished_converting)
         self.convert_thread.start()
@@ -294,6 +301,8 @@ class Ui_MainWindow(object):
         self.transcribe_audio(self.audio_file)
     def finished_transcribing(self):
         """This run when transcription finished to tidy up UI."""
+        print("[info] Transcription finished ...")
+
         self.progress_bar.setValue(100)
         self.transcribe_button.setEnabled(True)
         self.message_label.setText("")
@@ -394,7 +403,8 @@ class transcriptionThread(QThread):
     
     def run(self):
         r = sr.Recognizer()
-    
+        print("[info] Starting Transcription ...")
+
         if self.transcription_method == "Whisper":
             try:
                 # Transcribe using the file path with timestamps
