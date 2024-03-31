@@ -23,6 +23,10 @@ python app.py
 As soon as you open the sotware, you will see several options. [For GUI reference, use screenshot below]. 
 First, you can select the file you want to transcribe. Then, software will assign a .txt file name, as same as name of video. However, you can rename this file. NExt step is selecting appropriate language, and then starting transcription by clicking on "Transcribe" button.
 
+## Build with pyinstaller
+
+``` pyinstaller --noconfirm --onedir --console --add-data "medium.pt;." --add-data "C:/Users/[user]/Lib/site-packages/whisper/assets/gpt2.tiktoken;./whisper/assets" --add-data "C:/Users/[user]/anaconda3/Lib/site-packages/whisper/assets/mel_filters.npz;./whisper/assets" --add-data "C:/Users/[user]/anaconda3/Lib/site-packages/whisper/assets/multilingual.tiktoken;./whisper/assets" --hidden-import "openai-whisper" --recursive-copy-metadata "openai-whisper" --hidden-import "torch"  app.py ```
+
 ## Screenshot
 ![alt text](https://github.com/magnumical/Audio2Text/blob/main/img/img.png?raw=true)
 
