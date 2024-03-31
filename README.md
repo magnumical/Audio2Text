@@ -24,8 +24,9 @@ As soon as you open the sotware, you will see several options. [For GUI referenc
 First, you can select the file you want to transcribe. Then, software will assign a .txt file name, as same as name of video. However, you can rename this file. NExt step is selecting appropriate language, and then starting transcription by clicking on "Transcribe" button.
 
 ## Build with pyinstaller
+To build .exe app, you can use pyinstaller. For that, you need to load .pt files (whisper models) locally and bind them to .exe file. I used medium/small models so the overall size of program would be below 3GB. You need to place those file in the same directory as app.py (main application UI). Moreover, you need to add whisper assets into your exe file. All can be done through code below (replace the [user] and/or location of anaconda folder) 
 
-``` pyinstaller --noconfirm --onedir --console --add-data "medium.pt;." --add-data "C:/Users/[user]/Lib/site-packages/whisper/assets/gpt2.tiktoken;./whisper/assets" --add-data "C:/Users/[user]/anaconda3/Lib/site-packages/whisper/assets/mel_filters.npz;./whisper/assets" --add-data "C:/Users/[user]/anaconda3/Lib/site-packages/whisper/assets/multilingual.tiktoken;./whisper/assets" --hidden-import "openai-whisper" --recursive-copy-metadata "openai-whisper" --hidden-import "torch"  app.py ```
+``` pyinstaller --noconfirm --onedir --console --add-data "medium.pt;." --add-data "C:/Users/[user]/anaconda3/Lib/site-packages/whisper/assets/gpt2.tiktoken;./whisper/assets" --add-data "C:/Users/[user]/anaconda3/Lib/site-packages/whisper/assets/mel_filters.npz;./whisper/assets" --add-data "C:/Users/[user]/anaconda3/Lib/site-packages/whisper/assets/multilingual.tiktoken;./whisper/assets" --hidden-import "openai-whisper" --recursive-copy-metadata "openai-whisper" --hidden-import "torch"  app.py ```
 
 ## Screenshot
 ![alt text](https://github.com/magnumical/Audio2Text/blob/main/img/img.png?raw=true)
